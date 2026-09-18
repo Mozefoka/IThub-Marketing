@@ -1,0 +1,161 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import type { Swiper as SwiperInstance } from 'swiper'
+import { Autoplay } from 'swiper/modules'
+
+import 'swiper/css'
+
+interface Props {
+  images: string[]
+  slim?: 'slim'
+}
+
+const props = defineProps<Props>()
+
+const swiper = ref<SwiperInstance | null>(null)
+
+const prevSlide = () => {
+  swiper.value?.slidePrev()
+}
+
+const nextSlide = () => {
+  swiper.value?.slideNext()
+}
+</script>
+
+<template>
+  <div class="base-slider">
+    <button
+      class="base-slider__button base-slider__button--prev"
+      type="button"
+      @click="prevSlide"
+    ></button>
+
+    <Swiper
+      :modules="[Autoplay]"
+      class="base-slider__swiper"
+      :slides-per-view="1"
+      :space-between="0"
+      :speed="500"
+      :autoplay="{
+        delay: 5000,
+        disableOnInteraction: false,
+      }"
+      loop
+      @swiper="swiper = $event"
+    >
+      <SwiperSlide v-for="(image, index) in props.images" :key="index" class="base-slider__slide">
+        <img
+          :src="image"
+          :alt="`Слайд ${index + 1}`"
+          class="base-slider__image"
+          :class="`base-slider__image--${props.slim}`"
+        />
+      </SwiperSlide>
+    </Swiper>
+
+    <button
+      class="base-slider__button base-slider__button--next"
+      type="button"
+      @click="nextSlide"
+    ></button>
+  </div>
+</template>
+
+<style scoped lang="scss">
+@use '@/styles/variables' as *;
+
+.base-slider {
+  display: flex;
+  align-items: center;
+
+  &__swiper {
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+
+  &__slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__image {
+    width: 100%;
+    object-fit: cover;
+
+    &--slim {
+      height: 300px;
+
+      @media (max-width: 959px) {
+        height: 250px;
+      }
+
+      @media (max-width: 769px) {
+        height: 200px;
+      }
+
+      @media (max-width: 639px) {
+        height: 270px;
+      }
+    }
+  }
+
+  &__button {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: rgb(142 142 143 / 0.3);
+
+    @media (max-width: 639px) {
+      width: 25px;
+      height: 25px;
+    }
+
+    &:hover {
+      background: rgb(142 142 143 / 0.5);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      border-left: 1px solid $color-white;
+      border-bottom: 1px solid $color-white;
+      transform: translate(-35%, -50%) rotate(45deg);
+
+      @media (max-width: 639px) {
+        width: 8px;
+        height: 8px;
+      }
+    }
+
+    &--prev {
+      margin-right: 20px;
+
+      @media (max-width: 639px) {
+        margin-right: 10px;
+      }
+    }
+
+    &--next {
+      margin-left: 20px;
+
+      @media (max-width: 639px) {
+        margin-left: 10px;
+      }
+
+      &::before {
+        transform: translate(-65%, -50%) rotate(225deg);
+      }
+    }
+  }
+}
+</style>
