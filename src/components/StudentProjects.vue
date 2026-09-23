@@ -79,7 +79,15 @@ const projects: Project[] = [
 @use '@/styles/mixins' as *;
 
 .student-projects {
-  @include adaptive-zoom;
+  zoom: 1.3;
+
+  @media (max-width: 1150px) {
+    zoom: 1.2;
+  }
+
+  @media (max-width: 799px) {
+    zoom: 1;
+  }
 
   margin-bottom: $margin-bottom;
 
@@ -97,7 +105,7 @@ const projects: Project[] = [
     justify-content: space-around;
     align-items: center;
     gap: 15px;
-    padding: 100px 20px;
+    padding: 150px 20px;
     border-radius: 15px 15px 0 0;
     background: url('@/assets/images/purple-bg.jpg') no-repeat center center;
 

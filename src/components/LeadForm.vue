@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue'
+import {computed, onBeforeUnmount, onMounted, reactive, ref} from 'vue'
 import ButtonCta from '@/components/ui/ButtonCta.vue'
-import { images, icons } from '@/data/images.ts'
+import {images, icons} from '@/data/images.ts'
 
 interface Manager {
   name: string
@@ -28,7 +28,8 @@ interface FormData {
   phone: string
   email: string
   contactMethod: string
-  consent: boolean
+  consultationConsent: boolean
+  personalDataConsent: boolean
 }
 
 interface SubmitPayload extends FormData {
@@ -150,7 +151,8 @@ const form = reactive<FormData>({
   phone: '',
   email: '',
   contactMethod: 'whatsapp',
-  consent: false,
+  consultationConsent: false,
+  personalDataConsent: false,
 })
 
 const country = reactive<Country>({
@@ -267,7 +269,7 @@ onBeforeUnmount(() => {
           </p>
 
           <div class="lead-form__manager">
-            <img class="lead-form__manager-avatar" :src="manager.avatar" :alt="manager.name" />
+            <img class="lead-form__manager-avatar" :src="manager.avatar" :alt="manager.name"/>
 
             <div class="lead-form__manager-info">
               <p class="lead-form__manager-name">
@@ -304,7 +306,7 @@ onBeforeUnmount(() => {
                 :aria-expanded="countryDropdownOpen"
                 @click="toggleCountry"
               >
-                <img :src="country.flag" class="lead-form__flag" alt="Флаг" />
+                <img :src="country.flag" class="lead-form__flag" alt="Флаг"/>
 
                 <span
                   class="lead-form__chevron"
@@ -326,7 +328,7 @@ onBeforeUnmount(() => {
                   }"
                   @click="selectCountry(item)"
                 >
-                  <img :src="item.flag" class="lead-form__flag" alt="Флаг" />
+                  <img :src="item.flag" class="lead-form__flag" alt="Флаг"/>
 
                   <span class="lead-form__country-name">
                     {{ item.name }}
@@ -380,13 +382,37 @@ onBeforeUnmount(() => {
           </div>
 
           <label class="lead-form__consent">
-            <input v-model="form.consent" type="checkbox" required />
+            <input
+              v-model="form.consultationConsent"
+              type="checkbox"
+              required
+            />
 
             <span class="lead-form__consent-text">
-              Отправляя форму, я подтверждаю<a href="#" target="_blank" rel="noopener" @click.stop>
-                согласие </a
-              >на обработку персональных данных
-            </span>
+    Отправляя форму, я выражаю намерение на получение консультации по поступлению
+    и заключению договора об оказании образовательных услуг
+  </span>
+          </label>
+
+          <label class="lead-form__consent">
+            <input
+              v-model="form.personalDataConsent"
+              type="checkbox"
+              required
+            />
+
+            <span class="lead-form__consent-text">
+    Отправляя форму, я подтверждаю
+    <a
+      href="/privacy"
+      target="_blank"
+      rel="noopener noreferrer"
+      @click.stop
+    >
+      согласие
+    </a>
+    на обработку персональных данных
+  </span>
           </label>
 
           <div class="lead-form__submit">
@@ -405,8 +431,21 @@ onBeforeUnmount(() => {
 @use '@/styles/mixins' as *;
 
 .lead-form {
-  @include adaptive-zoom;
+  zoom: 1.3;
 
+  @media (max-width: 959px) {
+    zoom: 1.2;
+  }
+
+  @media (max-width: 639px) {
+    zoom: 1.3;
+  }
+
+  @media (max-width: 500px) {
+    zoom: 1.2;
+  }
+
+  font-size: 12px;
   margin-bottom: $margin-bottom;
 
   &__grid {
@@ -429,6 +468,7 @@ onBeforeUnmount(() => {
   }
 
   &__title {
+    max-width: 330px;
     margin-bottom: 20px;
 
     @media (max-width: 1199px) {
@@ -477,7 +517,7 @@ onBeforeUnmount(() => {
     flex-direction: column;
     gap: 15px;
     max-width: 500px;
-    padding: 20px;
+    padding: 15px;
     border-radius: 15px;
     background-color: $color-dark;
 
@@ -487,13 +527,12 @@ onBeforeUnmount(() => {
   }
 
   &__field {
-    padding: 15px;
+    padding: 10px;
     border-radius: 30px;
     color: $color-white;
     background: $color-light-dark;
-    transition:
-      background 0.15s ease,
-      border-color 0.15s ease;
+    transition: background 0.15s ease,
+    border-color 0.15s ease;
 
     &::placeholder {
       color: $color-gray;
@@ -505,19 +544,20 @@ onBeforeUnmount(() => {
   }
 
   &__select {
-    padding: 17px 15px;
+    padding: 10px;
     appearance: none;
     cursor: pointer;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9' fill='none'><path d='M1 1L7 7L13 1' stroke='%23a8a8ac' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
     background-repeat: no-repeat;
     background-position: right 25px center;
+    background-size: 10px;
   }
 
   &__phone {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 13px 15px;
+    padding: 10px 15px;
     border-radius: 30px;
     background: $color-light-dark;
     transition: background 0.15s ease;
@@ -577,7 +617,6 @@ onBeforeUnmount(() => {
     align-items: center;
     gap: 10px;
     padding: 10px;
-    font-size: clamp(12px, 1vw, 14px);
     border-radius: 10px;
     cursor: pointer;
     transition: background 0.12s ease;
@@ -602,28 +641,27 @@ onBeforeUnmount(() => {
 
   &__contact-label {
     margin-top: 10px;
-    font-size: 16px;
+    font-size: 12px;
   }
 
   &__radio-group {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
   }
 
   &__radio-option {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 16px;
     cursor: pointer;
 
     input {
       appearance: none;
       display: grid;
       place-content: center;
-      width: 22px;
-      height: 22px;
+      width: 16px;
+      height: 15px;
       border: 2px solid $color-purple;
       border-radius: 50%;
       cursor: pointer;
@@ -632,8 +670,8 @@ onBeforeUnmount(() => {
 
       &::before {
         content: '';
-        width: 10px;
-        height: 10px;
+        width: 7px;
+        height: 7px;
         border-radius: 50%;
         background: $color-purple;
         transform: scale(0);
@@ -656,21 +694,20 @@ onBeforeUnmount(() => {
     align-items: flex-start;
     gap: 10px;
     cursor: pointer;
-    margin-bottom: 20px;
 
     input {
+      margin-top: 3px;
       appearance: none;
       display: grid;
       place-content: center;
       flex-shrink: 0;
-      width: 22px;
-      height: 22px;
+      width: 15px;
+      height: 15px;
       border: 2px solid $color-purple;
       opacity: 0.5;
       cursor: pointer;
-      transition:
-        border-color 0.15s ease,
-        background 0.15s ease;
+      transition: border-color 0.15s ease,
+      background 0.15s ease;
 
       &:checked {
         border-color: $color-purple;
@@ -678,8 +715,8 @@ onBeforeUnmount(() => {
 
         &::before {
           content: '';
-          width: 6px;
-          height: 10px;
+          width: 5px;
+          height: 8px;
           border-right: 2px solid $color-purple;
           border-bottom: 2px solid $color-purple;
           transform: rotate(45deg) translate(-1px, -1px);
