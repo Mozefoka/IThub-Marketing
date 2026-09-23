@@ -96,7 +96,7 @@ const currentBlock = computed(() =>
 
 <template>
   <section class="teaching-approach">
-    <div class="container">
+    <div class="teaching-approach__container">
       <div class="teaching-approach__content">
         <h3 class="teaching-approach__title title-s">Подход наших преподавателей</h3>
 
@@ -202,9 +202,27 @@ const currentBlock = computed(() =>
 @use '@/styles/_mixins' as *;
 
 .teaching-approach {
-  @include adaptive-zoom;
+  zoom: 1.3;
+
+  @media (max-width: 959px) {
+    zoom: 1.2;
+  }
+
+  @media (max-width: 639px) {
+    zoom: 1.3;
+  }
+
+  @media (max-width: 500px) {
+    zoom: 1.2;
+  }
 
   margin-bottom: $margin-bottom;
+
+  &__container {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+  }
 
   &__content {
     display: flex;
@@ -232,7 +250,7 @@ const currentBlock = computed(() =>
   }
 
   &__tabs-button {
-    padding: 20px;
+    padding: 15px;
     font-size: clamp(12px, 1vw, 14px);
     line-height: 1.2;
     border-radius: 15px;
@@ -253,7 +271,7 @@ const currentBlock = computed(() =>
   &__panel {
     display: grid;
     gap: 20px 50px;
-    grid-template-columns: minmax(0, 555px) minmax(0, 300px);
+    grid-template-columns: minmax(0, 555px) minmax(0, 390px);
     grid-template-areas:
       'title media'
       'body media';

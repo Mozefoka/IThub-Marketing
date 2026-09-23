@@ -208,18 +208,14 @@ const props = defineProps<Props>()
   &__feature {
     position: relative;
     padding-left: 10px;
-    font-size: clamp(12px, 1vw, 14px);
-    line-height: 20px;
+    font-size: 11px;
+    line-height: 18px;
     color: $color-gray;
 
     &::before {
       content: '•';
       position: absolute;
       left: 0;
-    }
-
-    &:not(:last-child) {
-      margin-bottom: 5px;
     }
   }
 
@@ -270,7 +266,7 @@ const props = defineProps<Props>()
   &__tag {
     padding: 10px;
     margin: auto 0;
-    font-size: 14px;
+    font-size: 11px;
     background-color: $color-light-dark;
     border-radius: 20px;
     white-space: nowrap;
@@ -284,6 +280,8 @@ const props = defineProps<Props>()
   &__button {
     grid-area: button;
     align-self: flex-end;
+    max-width: 150px !important;
+    font-size: 11px;
   }
 }
 </style>
