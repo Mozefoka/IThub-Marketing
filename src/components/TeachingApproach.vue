@@ -216,12 +216,13 @@ const currentBlock = computed(() =>
     zoom: 1.2;
   }
 
-  margin-bottom: $margin-bottom;
+  margin-bottom: 80px;
 
   &__container {
     max-width: 1000px;
     width: 100%;
     margin: 0 auto;
+    padding: 0 15px;
   }
 
   &__content {
@@ -304,6 +305,7 @@ const currentBlock = computed(() =>
 
     @media (max-width: 639px) {
       max-width: 350px;
+      margin: 0 auto;
       text-align: center;
     }
   }

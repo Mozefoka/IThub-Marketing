@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import BaseBadge from '@/components/ui/BaseBadge.vue'
+import { images, icons } from "@/data/images.ts";
 
 interface SuccessStory {
   id: number
@@ -15,10 +16,51 @@ interface SuccessStory {
 
 interface Props {
   title?: string
-  cards: SuccessStory[]
   active?: boolean
   star?: string
 }
+
+const cards: SuccessStory[] = [
+  {
+    id: 1,
+    cardTitle: 'Трудоустроился на 2 курсе',
+    photo: images.roman,
+    studentName: 'Никита Барановский',
+    studentCourse: 'Студент ITHub СПБ, 2 курс',
+    badgeIcon: icons.successStoriesIcon,
+    badgeText: 'Траектория быстрого роста в ITHub',
+    description: [
+      'Уже на втором курсе Никита стал ведущим маркетологом в Union. Возглавил команду из четырех специалистов!',
+      'Во время учебы он решал реальные задачи, участвовал в коммерческих проектах и прокачивался на бизнес-играх в ITHUB',
+    ],
+  },
+
+  {
+    id: 2,
+    cardTitle: 'Стала призёром международного конкурса',
+    photo: images.roman,
+    studentName: 'Анастасия Акчурина',
+    studentCourse: 'Студентка ITHub СПБ, 2 курс',
+    badgeIcon: icons.successStoriesIcon,
+    badgeText: 'В ITHub теория мгновенно переходит в практику',
+    description: [
+      'Настя заняла 3-е место на международном конкурсе рекламы «Золотой колос». С проектом, который родился на бизнес-игре в IThub — там она вместе с командой прошла путь от идеи продукта до готовой стратегии продвижения',
+    ],
+  },
+
+  {
+    id: 3,
+    cardTitle: 'Трудоустроился на 2 курсе',
+    photo: images.roman,
+    studentName: 'Никита Барановский',
+    studentCourse: 'Студент ITHub СПБ, 2 курс',
+    badgeText: 'Преподаватели ITHub дают студентам возможность работать с реальными бюджетами',
+    description: [
+      'Уже на втором курсе Никита стал ведущим маркетологом в Union. Возглавил команду из четырех специалистов!',
+      'Во время учебы он решал реальные задачи, участвовал в коммерческих проектах и прокачивался на бизнес-играх в ITHUB',
+    ],
+  },
+]
 
 const props = withDefaults(defineProps<Props>(), {
   title: 'Истории успеха',
@@ -34,7 +76,7 @@ const TITLE_OUT = 300
 const TITLE_SHIFT = 75
 const TITLE_DRIFT = 80
 const WHEEL_RADIUS = 1000
-const lastIndex = props.cards.length - 1
+const lastIndex = cards.length - 1
 const pinLength = lastIndex * TRAVEL + Math.max(lastIndex - 1, 0) * HOLD + TAIL
 const uprightAt = (index: number) => index * TRAVEL + Math.max(index - 1, 0) * HOLD
 const root = ref<HTMLElement | null>(null)
@@ -124,7 +166,7 @@ const headlineStyle = (index: number) => {
     <div class="success-stories__stage" :class="{ 'success-stories__stage--bg': props.active }">
       <div class="success-stories__headlines" aria-hidden="true">
         <div
-          v-for="(story, index) in props.cards"
+          v-for="(story, index) in cards"
           :key="story.id"
           class="success-stories__headline"
           :style="headlineStyle(index)"
@@ -146,7 +188,7 @@ const headlineStyle = (index: number) => {
 
       <div class="success-stories__wheel" :style="wheelStyle">
         <div
-          v-for="(story, index) in props.cards"
+          v-for="(story, index) in cards"
           :key="story.id"
           class="success-stories__spoke"
           :style="spokeStyle(index)"
@@ -198,11 +240,12 @@ const headlineStyle = (index: number) => {
   --zoom-height: 1.6;
   --zoom: min(var(--zoom-width), var(--zoom-height));
 
-  --card-top: 190px;
-  --fade-window: 300px;
+  --card-top: 150px;
+  --fade-window: 360px;
 
   position: relative;
   height: calc(100vh + var(--pin-length));
+  background-color: $color-black;
   margin-bottom: $margin-bottom;
 
   @media (max-width: 1150px) {
@@ -211,20 +254,6 @@ const headlineStyle = (index: number) => {
 
   @media (max-width: 959px) {
     --zoom-width: 1.2;
-  }
-
-  @media (max-width: 639px) {
-    --zoom-width: 1.2;
-    --card-top: 150px;
-  }
-
-  @media (max-width: 500px) {
-    --zoom-width: 1.15;
-    --card-top: 160px;
-    --fade-window: 300px;
-  }
-
-  @media (max-height: 969px) {
     --zoom-height: 1.45;
   }
 
@@ -240,8 +269,19 @@ const headlineStyle = (index: number) => {
     --zoom-height: 1;
   }
 
+  @media (max-width: 639px) {
+    --zoom-width: 1.2;
+    --card-top: 150px;
+  }
+
   @media (max-height: 614px) {
     --zoom-height: 0.9;
+  }
+
+  @media (max-width: 500px) {
+    --zoom-width: 1.15;
+    --card-top: 160px;
+    --fade-window: 300px;
   }
 
   &__stage {
@@ -456,9 +496,12 @@ const headlineStyle = (index: number) => {
     transform: rotate(15deg);
     z-index: 2;
 
-    @media (max-width: 500px) {
-      right: -10px;
-    }
+      @media (max-width: 639px) {
+        position: static;
+        order: 3;
+        margin-top: 20px;
+        transform: rotate(10deg);
+      }
   }
 
   &__card-panel-description {
