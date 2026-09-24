@@ -259,10 +259,6 @@ const currentBlock = computed(() =>
     background-color: $color-dark;
     transition: all ease 0.2s;
 
-    @media (max-width: 639px) {
-      padding: 5px;
-    }
-
     &--active {
       color: $color-white;
       background-color: $color-purple;

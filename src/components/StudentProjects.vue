@@ -81,14 +81,6 @@ const projects: Project[] = [
 .student-projects {
   zoom: 1.3;
 
-  @media (max-width: 1150px) {
-    zoom: 1.2;
-  }
-
-  @media (max-width: 799px) {
-    zoom: 1;
-  }
-
   margin-bottom: $margin-bottom;
 
   &__title {
@@ -115,6 +107,10 @@ const projects: Project[] = [
       padding: 50px 20px;
       text-align: center;
     }
+
+      @media (max-width: 639px) {
+        padding: 100px 20px;
+      }
   }
 
   &__content {

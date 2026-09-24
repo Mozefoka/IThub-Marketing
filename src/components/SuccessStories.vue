@@ -94,21 +94,20 @@ const root = ref<HTMLElement | null>(null)
 const scrolled = ref(0)
 
 let frame = 0
-let rootTop = 0
 
-const updateRootTop = () => {
+// Пересчитываем позицию секции каждый раз заново, а не по
+// закэшированному значению — на iOS layout часто "доезжает"
+// после монтирования (шрифты/картинки), и старый rootTop уводит анимацию.
+const measure = () => {
+  frame = 0
+
   const element = root.value
 
   if (!element) {
     return
   }
 
-  rootTop = window.scrollY + element.getBoundingClientRect().top
-}
-
-const measure = () => {
-  frame = 0
-
+  const rootTop = window.scrollY + element.getBoundingClientRect().top
   const currentScroll = window.scrollY - rootTop
 
   scrolled.value = Math.min(
@@ -116,42 +115,6 @@ const measure = () => {
     pinLength,
   )
 }
-
-const onScroll = () => {
-  if (frame) {
-    return
-  }
-
-  frame = requestAnimationFrame(measure)
-}
-
-const onResize = () => {
-  updateRootTop()
-  onScroll()
-}
-
-onMounted(() => {
-  updateRootTop()
-  measure()
-
-  window.addEventListener('scroll', onScroll, {
-    passive: true,
-  })
-
-  window.addEventListener('resize', onResize, {
-    passive: true,
-  })
-})
-
-onBeforeUnmount(() => {
-  if (frame) {
-    cancelAnimationFrame(frame)
-    frame = 0
-  }
-
-  window.removeEventListener('scroll', onScroll)
-  window.removeEventListener('resize', onResize)
-})
 
 const requestMeasure = () => {
   if (frame) {
@@ -460,7 +423,6 @@ const headlineStyle = (index: number) => {
     transform-origin: top center;
 
     will-change: transform;
-    backface-visibility: hidden;
   }
 
   &__stage--bg {

@@ -52,6 +52,7 @@ import { images, icons } from '@/data/images.ts'
   padding-top: 50px;
   position: relative;
   text-align: center;
+  overflow: hidden;
   margin-bottom: $margin-bottom;
 
   &__star {
