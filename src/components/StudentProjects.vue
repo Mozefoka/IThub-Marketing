@@ -94,7 +94,7 @@ const projects: Project[] = [
       }
 
     @media (max-width: 639px) {
-      top: 40px;
+      top: 85px;
     }
   }
 
@@ -119,8 +119,7 @@ const projects: Project[] = [
     }
 
       @media (max-width: 639px) {
-        top: 95px;
-        padding: 100px 20px;
+        top: 130px;
       }
   }
 
