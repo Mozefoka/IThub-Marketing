@@ -95,9 +95,6 @@ const scrolled = ref(0)
 
 let frame = 0
 
-// Пересчитываем позицию секции каждый раз заново, а не по
-// закэшированному значению — на iOS layout часто "доезжает"
-// после монтирования (шрифты/картинки), и старый rootTop уводит анимацию.
 const measure = () => {
   frame = 0
 
@@ -404,24 +401,18 @@ const headlineStyle = (index: number) => {
 
   &__stage-content {
     position: relative;
-
     width: calc(100% / var(--zoom));
     height: calc(var(--viewport-height) / var(--zoom));
-
     margin: 0 auto;
-
     overflow: hidden;
-
     background: radial-gradient(
       ellipse 100% 50% at 50% 50%,
       rgba(142, 66, 235, 0.6) 0%,
       rgba(142, 66, 235, 0.25) 40%,
       transparent 70%
     );
-
     transform: scale(var(--zoom));
     transform-origin: top center;
-
     will-change: transform;
   }
 
@@ -439,21 +430,16 @@ const headlineStyle = (index: number) => {
   &__title {
     position: relative;
     z-index: 3;
-
     padding-top: 20px;
     margin-bottom: 20px;
-
     font-weight: 700;
     font-size: clamp(14px, 1.5vw, 18px);
     line-height: clamp(16px, 2vw, 20px);
-
     opacity: 0.3;
 
     &--size {
       max-width: 330px;
-
       font-weight: 400;
-
       opacity: 1;
     }
   }
@@ -468,66 +454,50 @@ const headlineStyle = (index: number) => {
     top: 0;
     left: 0;
     z-index: 3;
-
     width: 100%;
     height: var(--card-top);
-
     pointer-events: none;
   }
 
   &__headline {
     position: absolute;
     inset: auto 0 0;
-
     max-width: 700px;
-
     padding: 0 15px 10px;
     margin: 0 auto;
-
     text-align: center;
-
     will-change: opacity, transform;
   }
 
   &__wheel {
     position: absolute;
-
     top: calc(var(--card-top) + var(--wheel-radius));
     left: 50%;
-
     width: calc(var(--wheel-radius) * 2);
     height: calc(var(--wheel-radius) * 2);
-
     margin-top: calc(var(--wheel-radius) * -1);
     margin-left: calc(var(--wheel-radius) * -1);
-
     will-change: transform;
   }
 
   &__star {
     position: absolute;
-
     top: calc(var(--card-top) + 210px);
     left: 50%;
-
     width: 632px;
     height: 215px;
-
     transform: translate(-50%, -50%);
   }
 
   &__fade {
     position: absolute;
-
     top: 0;
     bottom: 0;
     z-index: 2;
-
     width: max(
       0px,
       calc((100% - var(--fade-window)) / 2)
     );
-
     pointer-events: none;
   }
 
@@ -568,30 +538,22 @@ const headlineStyle = (index: number) => {
 
   &__card {
     position: absolute;
-
     top: 0;
     left: 50%;
     z-index: 1;
-
     width: 460px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
-
     transform: translateX(-50%);
   }
 
   &__card-title {
     position: absolute;
-
     width: 1px;
     height: 1px;
-
     overflow: hidden;
-
     clip-path: inset(50%);
-
     white-space: nowrap;
   }
 
@@ -603,7 +565,6 @@ const headlineStyle = (index: number) => {
     img {
       width: 100%;
       height: 100%;
-
       object-fit: cover;
       object-position: center top;
     }
@@ -612,22 +573,19 @@ const headlineStyle = (index: number) => {
   &__card-panel {
     position: relative;
     top: -80px;
-
     max-width: 400px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
-
     gap: 10px;
-
     padding: 20px;
-
     border-radius: 15px;
-
     background-color: $color-dark;
-
     text-align: center;
+
+      @media (max-width: 639px) {
+        top: -100px;
+      }
 
     @media (max-width: 500px) {
       max-width: 290px;
@@ -635,16 +593,11 @@ const headlineStyle = (index: number) => {
 
     &--change {
       max-width: 600px;
-
       align-items: flex-start;
-
       padding: 20px 0 0 0;
-
       border-top: 1px solid;
       border-radius: 0;
-
       background-color: $color-black;
-
       text-align: left;
 
       @media (max-width: 729px) {
@@ -660,31 +613,22 @@ const headlineStyle = (index: number) => {
 
   &__card-panel-course {
     margin-bottom: 20px;
-
     color: $color-gray;
-
     font-size: clamp(12px, 1vw, 14px);
   }
 
   &__card-panel-badge {
     position: absolute;
-
     top: -40px;
     right: -65px;
-
     z-index: 2;
-
     max-width: 180px;
-
     transform: rotate(15deg);
 
     @media (max-width: 639px) {
       position: static;
-
       order: 3;
-
       margin-top: 20px;
-
       transform: rotate(10deg);
     }
   }
@@ -692,9 +636,7 @@ const headlineStyle = (index: number) => {
   &__card-panel-description {
     display: flex;
     flex-direction: column;
-
     gap: 20px;
-
     font-size: clamp(12px, 1vw, 14px);
     line-height: 1.15;
   }
@@ -706,20 +648,15 @@ const headlineStyle = (index: number) => {
 
     &__stage {
       position: static;
-
       height: auto;
-
       overflow: visible;
     }
 
     &__stage-content {
       width: 100%;
       height: auto;
-
       margin: 0;
-
       overflow: visible;
-
       transform: none !important;
     }
 
@@ -731,50 +668,36 @@ const headlineStyle = (index: number) => {
 
     &__wheel {
       position: static;
-
       display: flex;
       flex-direction: column;
       align-items: center;
-
       gap: 60px;
-
       width: auto;
       height: auto;
-
       margin: 40px 0 0;
-
       transform: none !important;
     }
 
     &__spoke {
       position: static;
-
       transform: none !important;
     }
 
     &__card {
       position: static;
-
       width: 100%;
       max-width: 460px;
-
       transform: none;
     }
 
     &__card-title {
       position: static;
-
       width: auto;
       height: auto;
-
       overflow: visible;
-
       clip-path: none;
-
       max-width: 340px;
-
       margin-bottom: 20px;
-
       white-space: normal;
       text-align: center;
     }

@@ -88,6 +88,14 @@ const projects: Project[] = [
     top: 100px;
     text-align: center;
     margin-bottom: 30px;
+
+      @media (max-width: 959px) {
+        top: 10px;
+      }
+
+    @media (max-width: 639px) {
+      top: 40px;
+    }
   }
 
   &__block {
@@ -102,13 +110,16 @@ const projects: Project[] = [
     background: url('@/assets/images/purple-bg.jpg') no-repeat center center;
 
     @media (max-width: 959px) {
+      top: 60px;
       flex-direction: column;
       gap: 30px;
       padding: 50px 20px;
       text-align: center;
+      margin-bottom: 50px;
     }
 
       @media (max-width: 639px) {
+        top: 95px;
         padding: 100px 20px;
       }
   }
