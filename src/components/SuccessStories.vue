@@ -80,6 +80,10 @@ const TITLE_DRIFT = 80
 
 const WHEEL_RADIUS = 1000
 
+const ZOOM_HEIGHT_MIN = 0.7
+const ZOOM_HEIGHT_MAX = 1.6
+const ZOOM_HEIGHT_GAP = 24 // запас снизу, px
+
 const lastIndex = cards.length - 1
 
 const pinLength =
@@ -92,8 +96,10 @@ const uprightAt = (index: number) =>
 
 const root = ref<HTMLElement | null>(null)
 const scrolled = ref(0)
+const zoomHeight = ref<number>()
 
 let frame = 0
+let zoomFrame = 0
 
 const measure = () => {
   frame = 0
@@ -121,14 +127,72 @@ const requestMeasure = () => {
   frame = requestAnimationFrame(measure)
 }
 
+const recalcZoomHeight = () => {
+  zoomFrame = 0
+
+  const element = root.value
+
+  if (!element) {
+    return
+  }
+
+  const cardTop =
+    parseFloat(
+      getComputedStyle(element).getPropertyValue('--card-top'),
+    ) || 0
+
+  const panels = element.querySelectorAll<HTMLElement>(
+    '.success-stories__card-panel',
+  )
+
+  let maxBottom = 0
+
+  panels.forEach((panel) => {
+    maxBottom = Math.max(
+      maxBottom,
+      panel.offsetTop + panel.offsetHeight,
+    )
+  })
+
+  if (!maxBottom) {
+    return
+  }
+
+  const requiredHeight = cardTop + maxBottom + ZOOM_HEIGHT_GAP
+  const fitted = window.innerHeight / requiredHeight
+
+  zoomHeight.value = Math.min(
+    ZOOM_HEIGHT_MAX,
+    Math.max(ZOOM_HEIGHT_MIN, fitted),
+  )
+}
+
+const requestZoomRecalc = () => {
+  if (zoomFrame) {
+    return
+  }
+
+  zoomFrame = requestAnimationFrame(recalcZoomHeight)
+}
+
+const handleResize = () => {
+  requestMeasure()
+  requestZoomRecalc()
+}
+
 onMounted(() => {
   measure()
+  recalcZoomHeight()
+
+  document.fonts?.ready.then(() => {
+    recalcZoomHeight()
+  })
 
   window.addEventListener('scroll', requestMeasure, {
     passive: true,
   })
 
-  window.addEventListener('resize', requestMeasure, {
+  window.addEventListener('resize', handleResize, {
     passive: true,
   })
 })
@@ -139,8 +203,13 @@ onBeforeUnmount(() => {
     frame = 0
   }
 
+  if (zoomFrame) {
+    cancelAnimationFrame(zoomFrame)
+    zoomFrame = 0
+  }
+
   window.removeEventListener('scroll', requestMeasure)
-  window.removeEventListener('resize', requestMeasure)
+  window.removeEventListener('resize', handleResize)
 })
 
 const rotation = computed(() => {
@@ -217,6 +286,9 @@ const headlineStyle = (index: number) => {
     :style="{
       '--pin-length': `${pinLength}px`,
       '--wheel-radius': `${WHEEL_RADIUS}px`,
+      ...(zoomHeight !== undefined
+        ? { '--zoom-height': zoomHeight }
+        : {}),
     }"
   >
     <div
