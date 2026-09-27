@@ -341,7 +341,7 @@ const headlineStyle = (index: number) => {
   --zoom-height: 1.6;
   --zoom: min(var(--zoom-width), var(--zoom-height));
 
-  --viewport-height: 100vh;
+  --viewport-height: 100dvh;
 
   --card-top: 150px;
   --fade-window: 360px;
@@ -351,8 +351,8 @@ const headlineStyle = (index: number) => {
   background-color: $color-black;
   margin-bottom: $margin-bottom;
 
-  @supports (height: 100svh) {
-    --viewport-height: 100svh;
+  @supports (height: 100dvh) {
+    --viewport-height: 100dvh;
   }
 
   @media (max-width: 1150px) {
