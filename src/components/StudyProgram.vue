@@ -36,7 +36,7 @@ const props = defineProps<Props>()
 
     <div class="container" :class="`container--${props.container}`">
       <div class="study-program__intro">
-        <h2 class="study-program__title title-md">Следующий кейс может быть твоим!</h2>
+        <h2 class="study-program__title title-md">Следующий кейс может <br> быть твоим!</h2>
         <p class="study-program__subtitle">
           Выбери направление в маркетинге и начни создавать своё портфолио ещё во время обучения
         </p>
@@ -135,7 +135,7 @@ const props = defineProps<Props>()
     'header features program'
     'button tags tags';
   gap: 30px;
-  padding: 20px;
+  padding: 50px;
   background-color: $color-dark;
   border-radius: 15px;
 
@@ -151,6 +151,7 @@ const props = defineProps<Props>()
   }
 
   @media (max-width: 959px) {
+    padding: 20px;
     grid-template-columns: 1fr;
     grid-template-areas:
       'header'
@@ -208,14 +209,18 @@ const props = defineProps<Props>()
   &__feature {
     position: relative;
     padding-left: 10px;
-    font-size: 11px;
-    line-height: 18px;
+    font-size: clamp(12px, 1vw, 14px);
+    line-height: 20px;
     color: $color-gray;
 
     &::before {
       content: '•';
       position: absolute;
       left: 0;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 5px;
     }
   }
 
@@ -266,7 +271,7 @@ const props = defineProps<Props>()
   &__tag {
     padding: 10px;
     margin: auto 0;
-    font-size: 11px;
+    font-size: 14px;
     background-color: $color-light-dark;
     border-radius: 20px;
     white-space: nowrap;
@@ -280,8 +285,6 @@ const props = defineProps<Props>()
   &__button {
     grid-area: button;
     align-self: flex-end;
-    max-width: 150px !important;
-    font-size: 11px;
   }
 }
 </style>

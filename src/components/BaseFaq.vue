@@ -133,7 +133,7 @@ const getMaxHeight = (index: number, id: number) => {
 
   &__title {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: $margin-bottom;
   }
 
   &__list {

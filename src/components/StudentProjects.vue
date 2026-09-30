@@ -85,7 +85,7 @@ const projects: Project[] = [
 
   &__title {
     position: sticky;
-    top: 100px;
+    top: 50px;
     text-align: center;
     margin-bottom: 30px;
 
@@ -100,7 +100,7 @@ const projects: Project[] = [
 
   &__block {
     position: sticky;
-    top: 150px;
+    top: 100px;
     display: flex;
     justify-content: space-around;
     align-items: center;

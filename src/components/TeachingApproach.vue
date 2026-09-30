@@ -25,7 +25,7 @@ interface TeachingApproachRules {
 const teachingBlocks = ref<TeachingApproachRules[]>([
   {
     id: 1,
-    title: 'Бизнес игра ITHUB x ENDY x ROCK&ROMI',
+    title: 'Бизнес игра ITHUB x\nENDY x ROCK&ROMI',
     teacher: { name: 'Александра Воронина', photo: images.alexandra },
     description: [
       'За 6 часов студенты ITHub объединились в команды маркетологов и дизайнеров, чтобы разработать проекты, продумать их позиционирование и представить свои решения экспертам индустрии',
@@ -40,7 +40,7 @@ const teachingBlocks = ref<TeachingApproachRules[]>([
 
   {
     id: 2,
-    title: 'Пара с действующими блогерами',
+    title: 'Пара с действующими\nблогерами',
     teacher: { name: 'Александра Воронина', photo: images.alexandra },
     guests: [
       {
@@ -64,7 +64,7 @@ const teachingBlocks = ref<TeachingApproachRules[]>([
 
   {
     id: 3,
-    title: 'Открытая пара с Охта Парком',
+    title: 'Открытая пара\nс Охта Парком',
     teacher: { name: 'Александра Воронина', photo: images.alexandra },
     description: [
       'На занятии студенты работали с реальными кейсами от рестораторов и отельеров: разбирали задачи бизнеса, предлагали решения и погружались в настоящие бизнес-процессы',
@@ -75,7 +75,7 @@ const teachingBlocks = ref<TeachingApproachRules[]>([
 
   {
     id: 4,
-    title: 'Открытая пара с «Петербургский кондитер»',
+    title: 'Открытая пара\nс «Петербургский кондитер»',
     teacher: { name: 'Александра Воронина', photo: images.alexandra },
     description: [
       'Студенты-маркетологи работали над реальной задачей фабрики «Петербургский кондитер»: разработали предложения по обновлению фирменного стиля и позиционирования бренда',
@@ -114,7 +114,7 @@ const currentBlock = computed(() =>
         </div>
 
         <div v-if="currentBlock" class="teaching-approach__panel">
-          <h2 class="teaching-approach__panel-title title-md">{{ currentBlock.title }}</h2>
+          <h2 class="teaching-approach__panel-title">{{ currentBlock.title }}</h2>
 
           <div class="teaching-approach__panel-body">
             <div class="teaching-approach__panel-teacher">
@@ -268,7 +268,7 @@ const currentBlock = computed(() =>
   &__panel {
     display: grid;
     gap: 20px 50px;
-    grid-template-columns: minmax(0, 555px) minmax(0, 390px);
+    grid-template-columns: minmax(0, 555px) minmax(0, 300px);
     grid-template-areas:
       'title media'
       'body media';
@@ -296,8 +296,11 @@ const currentBlock = computed(() =>
   }
 
   &__panel-title {
-    max-width: 460px;
+    font-weight: 700;
+    font-size: clamp(25px, 2vw, 29px);
+    line-height: clamp(25px, 2vw, 29px);
     grid-area: title;
+    white-space: pre-wrap;
 
     @media (max-width: 639px) {
       max-width: 350px;
@@ -395,11 +398,13 @@ const currentBlock = computed(() =>
     gap: 30px;
 
     p {
+      font-size: 12px;
       line-height: 15px;
     }
   }
 
   &__media {
+    height: 360px;
     border-radius: 20px;
     overflow: hidden;
     grid-area: media;

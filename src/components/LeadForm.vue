@@ -81,17 +81,17 @@ const contactMethods: ContactMethod[] = [
 
 const countries: Country[] = [
   {
-    code: 'PS',
-    name: 'Палестина',
-    dialCode: '+970',
-    flag: icons.psFlag,
-    mask: '(###) ###-##-##',
-  },
-  {
     code: 'RU',
     name: 'Россия',
     dialCode: '+7',
     flag: icons.ruFlag,
+    mask: '(###) ###-##-##',
+  },
+  {
+    code: 'PS',
+    name: 'Палестина',
+    dialCode: '+970',
+    flag: icons.psFlag,
     mask: '(###) ###-##-##',
   },
   {
@@ -469,6 +469,7 @@ onBeforeUnmount(() => {
 
   &__title {
     max-width: 330px;
+    white-space: pre-wrap;
     margin-bottom: 20px;
 
     @media (max-width: 1199px) {
@@ -477,7 +478,7 @@ onBeforeUnmount(() => {
   }
 
   &__description {
-    font-size: clamp(12px, 1vw, 14px);
+    font-size: 12px;
     line-height: 20px;
     margin-bottom: clamp(20px, 3vw, 40px);
   }
