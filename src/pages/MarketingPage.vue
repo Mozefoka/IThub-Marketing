@@ -12,7 +12,7 @@ import { marketingCases, marketingSuccessStories } from '@/data/marketing'
 <template>
   <main class="marketing">
     <HeroMarketing />
-    <SuccessStories :cards="marketingSuccessStories" />
+    <SuccessStories :cards="marketingSuccessStories" :star="icons.longStar" />
     <TeachingApproach />
     <StudentProjects />
     <StudyProgram :cases="marketingCases" zoom="zoom" />
