@@ -350,7 +350,7 @@ const headlineStyle = (index: number) => {
 
   &__stage {
     position: sticky;
-    top: 0;
+    top: -10px;
     height: var(--viewport-height);
     overflow: hidden;
     background-color: $color-black;
