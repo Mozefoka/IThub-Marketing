@@ -593,13 +593,13 @@ const headlineStyle = (index: number) => {
     max-width: 180px;
     transform: rotate(15deg);
 
-    @media (max-width: 639px) {
-      position: static;
-      order: 3;
-      margin-top: 20px;
-      max-width: none;
-      transform: rotate(10deg);
-    }
+    //@media (max-width: 639px) {
+    //  position: static;
+    //  order: 3;
+    //  margin-top: 20px;
+    //  max-width: none;
+    //  transform: rotate(10deg);
+    //}
   }
 
   &__card-panel-badge-text {
