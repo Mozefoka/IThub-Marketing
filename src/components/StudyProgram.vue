@@ -114,7 +114,7 @@ const props = defineProps<Props>()
     }
 
     @media (max-width: 639px) {
-      zoom: 1.5;
+      zoom: 1.4;
     }
   }
 
