@@ -305,6 +305,7 @@ const headlineStyle = (index: number) => {
 
   position: relative;
   height: calc(var(--viewport-height) + var(--pin-length));
+  overflow: visible;
   background-color: $color-black;
   margin-bottom: $margin-bottom;
 
@@ -509,6 +510,7 @@ const headlineStyle = (index: number) => {
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: visible;
     transform: translateX(-50%);
   }
 
@@ -549,6 +551,7 @@ const headlineStyle = (index: number) => {
     padding: 20px;
     border-radius: 15px;
     background-color: $color-dark;
+    overflow: visible;
     text-align: center;
 
       @media (max-width: 639px) {
@@ -604,6 +607,7 @@ const headlineStyle = (index: number) => {
 
   &__card-panel-badge-text {
     display: -webkit-box;
+    overflow: visible;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
   }
