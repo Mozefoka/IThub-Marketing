@@ -298,7 +298,7 @@ const headlineStyle = (index: number) => {
   --zoom-height: 1.6;
   --zoom: min(var(--zoom-width), var(--zoom-height));
 
-  --viewport-height: 100dvh;
+  --viewport-height: 100vh;
 
   --card-top: 100px;
   --fade-window: 360px;
@@ -308,8 +308,8 @@ const headlineStyle = (index: number) => {
   background-color: $color-black;
   margin-bottom: $margin-bottom;
 
-  @supports (height: 100dvh) {
-    --viewport-height: 100dvh;
+  @supports (height: 100vh) {
+    --viewport-height: 100vh;
   }
 
   @media (max-width: 1150px) {
@@ -350,7 +350,7 @@ const headlineStyle = (index: number) => {
 
   &__stage {
     position: sticky;
-    top: -10px;
+    top: 0;
     height: var(--viewport-height);
     overflow: hidden;
     background-color: $color-black;
