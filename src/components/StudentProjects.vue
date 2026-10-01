@@ -85,7 +85,7 @@ const projects: Project[] = [
 
   &__title {
     position: sticky;
-    top: 50px;
+    top: 100px;
     text-align: center;
     margin-bottom: 30px;
 
@@ -100,12 +100,12 @@ const projects: Project[] = [
 
   &__block {
     position: sticky;
-    top: 100px;
+    top: 150px;
     display: flex;
     justify-content: space-around;
     align-items: center;
     gap: 15px;
-    padding: 150px 20px;
+    padding: 150px 20px 200px 20px;
     border-radius: 15px 15px 0 0;
     background: url('@/assets/images/purple-bg.jpg') no-repeat center center;
 
@@ -121,6 +121,10 @@ const projects: Project[] = [
       @media (max-width: 639px) {
         top: 130px;
       }
+
+    &:last-child {
+      padding: 150px 20px 200px 20px;
+    }
   }
 
   &__content {
@@ -147,7 +151,11 @@ const projects: Project[] = [
     max-width: 400px;
 
     @media (max-width: 639px) {
-      max-width: 235px;
+      max-width: 320px;
+    }
+
+    @media (max-width: 427px) {
+      max-width: 270px;
     }
   }
 }

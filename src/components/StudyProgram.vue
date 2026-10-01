@@ -103,7 +103,19 @@ const props = defineProps<Props>()
   margin-bottom: $margin-bottom;
 
   &--zoom {
-    @include adaptive-zoom;
+    zoom: 1.4;
+
+    @media (max-width: 1150px) {
+      zoom: 1.3;
+    }
+
+    @media (max-width: 959px) {
+      zoom: 1.2;
+    }
+
+    @media (max-width: 639px) {
+      zoom: 1.5;
+    }
   }
 
   &__top-image {

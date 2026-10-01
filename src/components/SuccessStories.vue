@@ -345,7 +345,7 @@ const headlineStyle = (index: number) => {
   @media (max-width: 500px) {
     --zoom-width: 1.15;
     --card-top: 160px;
-    --fade-window: 300px;
+    --fade-window: 100%;
   }
 
   &__stage {
@@ -530,8 +530,6 @@ const headlineStyle = (index: number) => {
     height: 350px;
 
     @media (max-width: 639px) {
-      max-width: 300px;
-      height: 300px;
       margin-bottom: 30px;
     }
 
@@ -561,7 +559,7 @@ const headlineStyle = (index: number) => {
       }
 
     @media (max-width: 500px) {
-      max-width: 290px;
+      max-width: 350px;
     }
 
     &--change {

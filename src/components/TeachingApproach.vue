@@ -3,7 +3,6 @@ import { ref, computed } from 'vue'
 import BenefitsBlock from '@/components/ui/BenefitsBlock.vue'
 import BaseBadge from '@/components/ui/BaseBadge.vue'
 import { images } from '@/data/images.ts'
-import video from '@/assets/video/oiia.mp4'
 
 interface Guest {
   name: string
@@ -35,7 +34,7 @@ const teachingBlocks = ref<TeachingApproachRules[]>([
       'Реальный кейс для портфолио и обратную связь от практикующих специалистов',
     ],
     type: 'video',
-    media: video,
+    media: 'https://kinescope.io/hE7Y98Eb6T85QTSe1dxUaR',
   },
 
   {
@@ -59,7 +58,7 @@ const teachingBlocks = ref<TeachingApproachRules[]>([
       'Яна пригласила на занятие Кристину Гулину и Марию Яцемирскую — практикующих инфлюенсеров и создателей контента. Они поделились опытом создания контента, развития аудитории, работы с брендами и монетизации личного блога',
     ],
     type: 'video',
-    media: 'https://kinescope.io/hE7Y98Eb6T85QTSe1dxUaR',
+    media: 'https://kinescope.io/vunR9paPhZBzYmhzfXEzqi',
   },
 
   {
@@ -115,6 +114,11 @@ const currentBlock = computed(() =>
 
         <div v-if="currentBlock" class="teaching-approach__panel">
           <h2 class="teaching-approach__panel-title">{{ currentBlock.title }}</h2>
+
+          <h2 class="teaching-approach__panel-title-mobile">Бизнес игра
+            <br> ITHUB x
+            ENDY x <br> ROCK&ROMI
+          </h2>
 
           <div class="teaching-approach__panel-body">
             <div class="teaching-approach__panel-teacher">
@@ -233,7 +237,6 @@ const currentBlock = computed(() =>
   }
 
   &__title {
-    opacity: 1;
     align-self: center;
   }
 
@@ -253,7 +256,7 @@ const currentBlock = computed(() =>
 
   &__tabs-button {
     padding: 15px;
-    font-size: clamp(12px, 1vw, 14px);
+    font-size: 14px;
     line-height: 1.2;
     border-radius: 15px;
     color: $color-gray;
@@ -307,6 +310,26 @@ const currentBlock = computed(() =>
       max-width: 350px;
       margin: 0 auto;
       text-align: center;
+    }
+
+    @media (max-width: 479px) {
+      display: none;
+    }
+  }
+
+  &__panel-title-mobile {
+    display: none;
+    font-weight: 700;
+    font-size: clamp(25px, 2vw, 29px);
+    line-height: clamp(25px, 2vw, 29px);
+    grid-area: title;
+    white-space: pre-wrap;
+    max-width: 350px;
+    margin: 0 auto;
+    text-align: center;
+
+    @media (max-width: 479px) {
+      display: block;
     }
   }
 
@@ -411,7 +434,7 @@ const currentBlock = computed(() =>
     grid-area: media;
 
     @media (max-width: 639px) {
-      height: 300px;
+      height: 500px;
     }
   }
 

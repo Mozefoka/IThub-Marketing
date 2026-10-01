@@ -15,7 +15,7 @@ import { marketingCases, marketingSuccessStories } from '@/data/marketing'
     <SuccessStories :cards="marketingSuccessStories" :star="icons.longStar" />
     <TeachingApproach />
     <StudentProjects />
-    <StudyProgram :cases="marketingCases" zoom="zoom" />
+    <StudyProgram :cases="marketingCases" zoom="zoom" container="wide" />
     <LeadForm :title="`Готов к карьере\nв маркетинге?`" />
     <BaseFaq />
   </main>

@@ -47,13 +47,25 @@ import { images, icons } from '@/data/images.ts'
 @use '@/styles/_mixins' as *;
 
 .marketing-hero {
-  @include adaptive-zoom;
+  zoom: 1.6;
+
+  @media (max-width: 1150px) {
+    zoom: 1.4;
+  }
+
+  @media (max-width: 959px) {
+    zoom: 1.6;
+  }
+
+  @media (max-width: 639px) {
+    zoom: 1.5;
+  }
 
   padding-top: 50px;
   position: relative;
   text-align: center;
   overflow: hidden;
-  margin-bottom: $margin-bottom;
+  margin-bottom: clamp(40px, 10vw, 150px);
 
   &__star {
     position: absolute;
@@ -76,6 +88,10 @@ import { images, icons } from '@/data/images.ts'
     flex-direction: column;
     align-items: center;
     gap: 20px;
+
+    @media (max-width: 1150px) {
+      gap: 35px;
+    }
   }
 
   &__stat {
