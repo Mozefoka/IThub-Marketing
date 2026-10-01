@@ -361,7 +361,6 @@ const headlineStyle = (index: number) => {
     width: calc(100% / var(--zoom));
     height: calc(var(--viewport-height) / var(--zoom));
     margin: 0 auto;
-    overflow: hidden;
     background: radial-gradient(
       ellipse 100% 50% at 50% 50%,
       rgba(142, 66, 235, 0.6) 20%,
@@ -421,6 +420,10 @@ const headlineStyle = (index: number) => {
     width: 100%;
     height: var(--card-top);
     pointer-events: none;
+
+      @media (max-width: 639px) {
+        top: 44px;
+      }
   }
 
   &__headline {
@@ -527,7 +530,9 @@ const headlineStyle = (index: number) => {
     height: 350px;
 
     @media (max-width: 639px) {
-      height: 330px;
+      max-width: 300px;
+      height: 300px;
+      margin-bottom: 30px;
     }
 
     img {
@@ -552,7 +557,7 @@ const headlineStyle = (index: number) => {
     text-align: center;
 
       @media (max-width: 639px) {
-        top: -100px;
+        top: -120px;
       }
 
     @media (max-width: 500px) {
@@ -593,13 +598,13 @@ const headlineStyle = (index: number) => {
     max-width: 180px;
     transform: rotate(15deg);
 
-    //@media (max-width: 639px) {
-    //  position: static;
-    //  order: 3;
-    //  margin-top: 20px;
-    //  max-width: none;
-    //  transform: rotate(10deg);
-    //}
+    @media (max-width: 639px) {
+      position: static;
+      order: 3;
+      margin-top: 20px;
+      max-width: none;
+      transform: rotate(10deg);
+    }
   }
 
   &__card-panel-badge-text {
