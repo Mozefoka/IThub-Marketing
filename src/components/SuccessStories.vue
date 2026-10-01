@@ -306,7 +306,7 @@ const headlineStyle = (index: number) => {
   position: relative;
   height: calc(var(--viewport-height) + var(--pin-length));
   background-color: $color-black;
-  padding-bottom: clamp(50px, 5vw, 80px);
+  margin-bottom: $margin-bottom;
 
   @supports (height: 100vh) {
     --viewport-height: 100vh;
