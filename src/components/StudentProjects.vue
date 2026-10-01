@@ -96,6 +96,10 @@ const projects: Project[] = [
     @media (max-width: 639px) {
       top: 85px;
     }
+
+      @media (max-width: 479px) {
+        top: 0;
+      }
   }
 
   &__block {
@@ -115,15 +119,15 @@ const projects: Project[] = [
       gap: 30px;
       padding: 50px 20px;
       text-align: center;
-      margin-bottom: 50px;
     }
 
       @media (max-width: 639px) {
         top: 130px;
       }
 
-    &:last-child {
-      padding: 150px 20px 200px 20px;
+    @media (max-width: 479px) {
+      top: 50px;
+      padding: 20px;
     }
   }
 
