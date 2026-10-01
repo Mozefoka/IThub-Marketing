@@ -233,6 +233,7 @@ const currentBlock = computed(() =>
   }
 
   &__title {
+    opacity: 1;
     align-self: center;
   }
 

@@ -149,14 +149,6 @@ const projects: Project[] = [
     @media (max-width: 639px) {
       max-width: 235px;
     }
-
-    @media (max-width: 429px) {
-      max-width: 200px;
-    }
-
-    @media (max-width: 379px) {
-      max-width: 150px;
-    }
   }
 }
 </style>
