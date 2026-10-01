@@ -604,7 +604,6 @@ const headlineStyle = (index: number) => {
 
   &__card-panel-badge-text {
     display: -webkit-box;
-    overflow: hidden;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
   }
